@@ -1,4 +1,5 @@
 import { makeQuery } from '#root/db';
+import { handleError, sendResponse } from './utils';
 
 const buildLocationParams = (locationId) => ({
     TableName: 'sensei',
@@ -25,10 +26,6 @@ const buildReadingParams = (deviceId) => ({
 const getDevice = (locationId) => (
     makeQuery(buildLocationParams(locationId))
 );
-
-const sendResponse = res => data => res.send(data);
-
-const handleError = next => e => next(e);
 
 const getReadings = ({Items: items = []}) => {
     const [item] = items;

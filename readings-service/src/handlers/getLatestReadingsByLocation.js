@@ -1,5 +1,6 @@
 import { makeQuery } from '#root/db';
 import { FIFTEEN_MINUTES } from '#root/utils';
+import { flatten, handleError, sendResponse } from './utils';
 
 const locationsQueryParams = {
     TableName: 'sensei',
@@ -33,12 +34,6 @@ const getLocations = () => makeQuery(locationsQueryParams);
 const getLatestReadings = (deviceId) => (
     makeQuery(buildLatestReadingsQueryParams(deviceId))
 );
-
-const handleError = (next) => (e) => next(e); 
-
-const flatten = results => [].concat(...results);
-
-const sendResponse = res => data => res.send(data); 
 
 const promisifyAndMapLocationsWithLatestReadings = ({ Items: locations = [] }) => (
     locations.map(location => ({

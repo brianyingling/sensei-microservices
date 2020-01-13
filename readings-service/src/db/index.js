@@ -13,6 +13,16 @@ const makeQuery = params => {
     });
 };
 
+const put = params => {
+    return new Promise((resolve, reject) => {
+        docClient.put(params, (err, data) => {
+            if (err) reject(err)
+            else resolve(data);
+        });
+    });
+}
+
 export {
-    makeQuery
+    makeQuery,
+    put
 };
