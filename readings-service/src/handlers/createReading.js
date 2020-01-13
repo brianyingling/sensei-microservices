@@ -8,3 +8,5 @@ const createReading = (req, res, next) => {
         .then(sendResponse)
         .catch(handleError(next));
 }
+
+export default createReading;
