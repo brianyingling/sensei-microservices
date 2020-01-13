@@ -1,0 +1,7 @@
+version: "3"
+services:
+    api-gateway:
+    locations-service:
+    readings-service:
+    users-service:
+    
