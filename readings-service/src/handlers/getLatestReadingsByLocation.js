@@ -29,13 +29,18 @@ const buildLatestReadingsQueryParams = (deviceId) => {
     };
 };
 
-const getLocations = () => makeQuery(locationsQueryParams);
+const getLocations = () => {
+    console.log('INSIDE GET LOCATIONS');
+    const query = makeQuery(locationsQueryParams);
+    console.log('query:', query);
+    return query;
+}
 
 const getLatestReadings = (deviceId) => (
     makeQuery(buildLatestReadingsQueryParams(deviceId))
 );
 
-const promisifyAndMapLocationsWithLatestReadings = ({ Items: locations = [] }) => (
+const promisifyAndMapLocationsWithLatestReadings = ({ Items: locations = [] }) => console.log('LOCATIONS:', locations) || (
     locations.map(location => ({
         ...location,
         readings: getLatestReadings(location.data)
@@ -57,11 +62,22 @@ const resolveLocationsWithLatestReadings = locationsWithReadings => {
         });
 }
 
-const getLatestReadingsByLocation = (req, res, next) => (
+const format = (readings) => readings.map(data => ({
+    id: data.reading.PK,
+    createdAt: data.reading.createdAt,
+    deviceId: data.reading.data,
+    locationId: data.PK,
+    locationName: data.name,
+    value: data.reading.value,
+    scale: data.reading.scale,
+}));
+
+const getLatestReadingsByLocation = (req, res, next) => console.log('I GOT HERE TOO:') || (
     getLocations()
         .then(promisifyAndMapLocationsWithLatestReadings)
         .then(resolveLocationsWithLatestReadings)
         .then(flatten)
+        .then(format)
         .then(sendResponse(res))
         .catch(handleError(next))
 )

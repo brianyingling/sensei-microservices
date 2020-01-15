@@ -1,7 +1,22 @@
 version: "3"
 services:
     api-gateway:
-    locations-service:
+        build: "./api-gateway"
+        depends_on: 
+            - readings-service
+        ports:
+            - 9000:9000
+        volumes:
+            - ./api-gateway:/opt/app
+    
     readings-service:
-    users-service:
+        build: "./readings-service"
+        env_file:
+            - .env
+        ports:
+            - 9001:9001
+        volumes:
+            - ./readings-service:/opt/app
+    # locations-service:
+    # users-service:
     

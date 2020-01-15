@@ -4,7 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import routes from './routes';
 
-const PORT = 9000;
+const PORT = 9001;
 
 const app = express();
 
