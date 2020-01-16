@@ -1,4 +1,3 @@
-
 import got from 'got';
 
 const URI = 'http://readings-service:9001'

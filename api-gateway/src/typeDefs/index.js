@@ -6,11 +6,6 @@ const typeDefs = gql`
         Fahrenheit
     }
 
-    type HelloWorld {
-        id: ID!,
-        message: String!
-    }
-
     type Location {
         id: ID!,
         name: String!
@@ -33,7 +28,6 @@ const typeDefs = gql`
     }
 
     type Query {
-        helloWorld: HelloWorld!
         latestReadings: [Reading!]!
         user(id: ID!): User
     }

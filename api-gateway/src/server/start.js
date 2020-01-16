@@ -11,7 +11,6 @@ const apolloServer = new ApolloServer({
     context: a => a,
     // formatErrors: formatGraphqlErrors
     resolvers,
-    // resolvers,
     typeDefs 
 });
 
