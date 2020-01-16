@@ -4,6 +4,15 @@ const docClient = new AWS.DynamoDB.DocumentClient({
     region: 'us-east-1'
 });
 
+const put = params => {
+    return new Promise((resolve, reject) => {
+        docClient.put(params, (err, data) => {
+            if (err) reject(err)
+            else resolve(data);
+        });
+    });
+}
+
 const query = params => {
     return new Promise((resolve, reject) => {
         docClient.query(params, (err, data) => {
@@ -14,5 +23,6 @@ const query = params => {
 };
 
 export {
+    put,
     query
 }

@@ -5,7 +5,7 @@ const buildParams = (id) => ({
     TableName: 'sensei',
     KeyConditionExpression: 'PK = :pk',
     ExpressionAttributeValues: {
-        ":pk": id,
+        ":pk": id
     }
  });
 

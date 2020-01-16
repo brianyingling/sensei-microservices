@@ -37,7 +37,7 @@ const getLatestReadings = (deviceId) => (
     makeQuery(buildLatestReadingsQueryParams(deviceId))
 );
 
-const promisifyAndMapLocationsWithLatestReadings = ({ Items: locations = [] }) => console.log('LOCATIONS:', locations) || (
+const promisifyAndMapLocationsWithLatestReadings = ({ Items: locations = [] }) => (
     locations.map(location => ({
         ...location,
         readings: getLatestReadings(location.data)
