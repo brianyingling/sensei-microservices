@@ -29,12 +29,9 @@ const buildLatestReadingsQueryParams = (deviceId) => {
     };
 };
 
-const getLocations = () => {
-    console.log('INSIDE GET LOCATIONS');
-    const query = makeQuery(locationsQueryParams);
-    console.log('query:', query);
-    return query;
-}
+const getLocations = () => (
+    makeQuery(locationsQueryParams)
+);
 
 const getLatestReadings = (deviceId) => (
     makeQuery(buildLatestReadingsQueryParams(deviceId))
@@ -66,8 +63,10 @@ const format = (readings) => readings.map(data => ({
     id: data.reading.PK,
     createdAt: data.reading.createdAt,
     deviceId: data.reading.data,
-    locationId: data.PK,
-    locationName: data.name,
+    location: {
+        id: data.PK,
+        name: data.name,
+    },
     value: data.reading.value,
     scale: data.reading.scale,
 }));

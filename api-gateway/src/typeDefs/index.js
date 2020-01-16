@@ -11,12 +11,20 @@ const typeDefs = gql`
         message: String!
     }
 
+    type Location {
+        id: ID!,
+        name: String!
+    }
+
     type Reading {
         id: ID!,
         createdAt: String!,
         value: Float!,
         scale: Scale!
         deviceId: ID!
+        location: Location!
+        locationName: String!
+        locationId: ID!
     }
 
     type Query {
