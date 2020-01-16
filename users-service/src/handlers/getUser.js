@@ -1,4 +1,5 @@
 import { query } from '#root/db';
+import { handleError, sendResponse } from './utils';
 
 const buildParams = (id) => ({
     TableName: 'sensei',
@@ -8,11 +9,9 @@ const buildParams = (id) => ({
     }
  });
 
-const sendResponse = res => data => res.send(data);
-
-const handleError = next => e => next(e);
-
 const format = ({Items: items = []}) => {
+    if (items.length === 0)
+        return null;
     const [user] = items;
     return {
         id: user.PK,

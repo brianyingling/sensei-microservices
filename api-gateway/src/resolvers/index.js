@@ -1,19 +1,14 @@
 import { ReadingsService } from '#root/adapters';
-
-const helloWorld = (parent, args, context, info) => {
-    return {
-        id: "This is the ID",
-        message: "Hello World!"
-    }
-}
-
-const getLatestReadings = async (parent, args, context, info) => {
-    return await ReadingsService.getLatestReadingOfEachLocation();
-}
+import { 
+    getLatestReadings as latestReadings,
+    getUser as user,
+    helloWorld
+} from './Query'
 
 export default {
     Query: {
         helloWorld,
-        latestReadings: getLatestReadings
+        latestReadings,
+        user
     }
 };

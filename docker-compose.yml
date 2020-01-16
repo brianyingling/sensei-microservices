@@ -4,6 +4,7 @@ services:
         build: "./api-gateway"
         depends_on: 
             - readings-service
+            - users-service
         ports:
             - 9000:9000
         volumes:
@@ -17,6 +18,16 @@ services:
             - 9001:9001
         volumes:
             - ./readings-service:/opt/app
+    
+    users-service:
+        build: "./users-service"
+        env_file:
+            - .env
+        ports:
+            - 9002:9002
+        volumes:
+            - ./users-service:/opt/app
+            
     # locations-service:
     # users-service:
     

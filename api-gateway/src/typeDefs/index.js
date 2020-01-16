@@ -27,9 +27,15 @@ const typeDefs = gql`
         locationId: ID!
     }
 
+    type User {
+        id: ID!,
+        email: String!
+    }
+
     type Query {
         helloWorld: HelloWorld!
         latestReadings: [Reading!]!
+        user(id: ID!): User
     }
 
 `;
