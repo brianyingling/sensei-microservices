@@ -1,5 +1,5 @@
 import { ReadingsService } from '#root/adapters';
-import { createUser } from './Mutation';
+import { createSession, createUser } from './Mutation';
 import { 
     getLatestReadings as latestReadings,
     getUser as user,
@@ -7,6 +7,7 @@ import {
 
 export default {
     Mutation: {
+        createSession,
         createUser,
     },
     Query: {

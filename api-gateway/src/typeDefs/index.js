@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server';
 
 const typeDefs = gql`
+    scalar Date
+
     enum Scale {
         Celsius
         Fahrenheit
@@ -27,12 +29,20 @@ const typeDefs = gql`
         email: String!
     }
 
+    type Session {
+        createdAt: Date!,
+        expiresAt: Date!,
+        id: ID!,
+        userId: ID!
+    }
+
     type Query {
         latestReadings: [Reading!]!
         user(id: ID!): User
     }
 
     type Mutation {
+        createSession(email: String!, password: String!): Session
         createUser(email: String!, password: String!): User
     }
 `;

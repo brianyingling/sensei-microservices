@@ -17,6 +17,12 @@ app.use(cors({
 
 routes(app);
 
+app.use((err, req, res, next) => {
+    return res.status(500).json({
+        message: err.message
+    })
+});
+
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Users Service listening on port ${PORT}`);
 });

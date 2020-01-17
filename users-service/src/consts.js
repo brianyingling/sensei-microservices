@@ -1,0 +1,5 @@
+const USER_SESSION_EXPIRY_HOURS = 1;
+
+export {
+    USER_SESSION_EXPIRY_HOURS
+}

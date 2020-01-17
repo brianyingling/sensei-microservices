@@ -20,9 +20,13 @@ const format = ({Items: items = []}) => {
     };
 }
 
-const getUser = (req, res, next) => (
+export const queryForUser = id => (
     query(buildParams(req.params.id))
         .then(format)
+);
+
+const getUser = (req, res, next) => (
+    queryForUser(req.params.id)
         .then(sendResponse(res))
         .catch(handleError)
 );

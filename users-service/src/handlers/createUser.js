@@ -21,14 +21,13 @@ const buildGetUserByEmailParams = email => ({
     }
 });
 
-const checkIfUserAlreadyExists = res => {
+const checkIfUserAlreadyExists = next => res => {
     if (res.Items && res.Items.length > 0)
         throw new Error('User already exists');
 }
 
 const getUserByEmail = email => {
-    return query(buildGetUserByEmailParams(email))
-        .then(checkIfUserAlreadyExists);
+    return query(buildGetUserByEmailParams(email));
 }
 
 const createUser = (req, res, next) => {
@@ -54,6 +53,7 @@ const createUser = (req, res, next) => {
     };
 
     return getUserByEmail(email)
+        .then(checkIfUserAlreadyExists(next))
         .then(() => put(params))
         .then(format(Item))
         .then(sendResponse(res))
