@@ -21,7 +21,7 @@ const format = ({Items: items = []}) => {
 }
 
 export const queryForUser = id => (
-    query(buildParams(req.params.id))
+    query(buildParams(id))
         .then(format)
 );
 

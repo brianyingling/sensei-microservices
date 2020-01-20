@@ -5,7 +5,9 @@ const createUser = async (parent, { email, password }, context, info) => {
 }
 
 const createSession = async (parent, { email, password }, context, info) => {
-    return await UsersService.createSession(email, password);
+    const session = await UsersService.createSession(email, password);
+    context.res.cookie('sessionId', session.id, { httpOnly: true });
+    return session;    
 }
 
 export {

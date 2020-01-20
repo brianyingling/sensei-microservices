@@ -38,6 +38,8 @@ const typeDefs = gql`
 
     type Query {
         latestReadings: [Reading!]!
+        # session(id: ID!): Session
+        session(me: Boolean!): Session 
         user(id: ID!): User
     }
 
