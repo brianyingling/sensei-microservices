@@ -10,10 +10,10 @@ import injectSession from './injectSession';
 const PORT = 9000;
 
 const apolloServer = new ApolloServer({
-    context: a => a,
-    formatError: formatGraphQLErrors,
-    resolvers,
-    typeDefs
+  context: (a) => a,
+  formatError: formatGraphQLErrors,
+  resolvers,
+  typeDefs,
 });
 
 const app = express();
@@ -21,20 +21,20 @@ const app = express();
 app.use(cookieParser());
 
 app.use(
-    cors({
-        origin: (origin, cb) => cb(null, true),
-        credentials: true
-    })
+  cors({
+    origin: (origin, cb) => cb(null, true),
+    credentials: true,
+  }),
 );
 
 app.use(injectSession);
 
 apolloServer.applyMiddleware({
-    app,
-    cors: false,
-    path: '/graphql'
+  app,
+  cors: false,
+  path: '/graphql',
 });
 
-app.listen(PORT, '0.0.0.0',() => {
-    console.log(`API Gateway listening on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`API Gateway listening on port ${PORT}`);
 });

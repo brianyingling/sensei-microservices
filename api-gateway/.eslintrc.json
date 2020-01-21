@@ -4,9 +4,11 @@
         "node": true
     },
     "extends": [
+        "airbnb",
         "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb"
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:react/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -22,5 +24,10 @@
     "plugins": [
         "react"
     ],
+    "settings": {
+        "import/resolver": {
+            "babel-module": {}
+        }
+    },
     "rules": {}
 }
