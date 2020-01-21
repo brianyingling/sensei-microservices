@@ -1,23 +1,23 @@
 module.exports = {
-    plugins: [
-        [
-            "module-resolver",
-            {
-                alias: {
-                    "#root":"./src"
-                }
+  plugins: [
+    [
+      'module-resolver',
+      {
+        alias: {
+          '#root': './src',
+        },
 
-            }
-        ]
+      },
     ],
-    presets: [
-        [
-            "@babel/preset-env",
-            {
-                targets: {
-                    node: "current"
-                }
-            }
-        ]
-    ]
-}
+  ],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
+};
