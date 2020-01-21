@@ -13,7 +13,7 @@ const apolloServer = new ApolloServer({
     context: a => a,
     formatError: formatGraphQLErrors,
     resolvers,
-    typeDefs 
+    typeDefs
 });
 
 const app = express();
