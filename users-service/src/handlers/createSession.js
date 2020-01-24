@@ -1,63 +1,34 @@
-import uuidv4 from 'uuid/v4';
-import { addHours } from 'date-fns';
-import { put, query } from '#root/db';
-import { USER_SESSION_EXPIRY_HOURS } from '#root/consts';
-import { queryForUser } from './getUser';
+import { put } from '#root/db';
 import getUserByEmail from './getUserByEmail';
-import {
-    handleError,
-    passwordCompareSync,
-    sendResponse
-} from './utils';
+import { handleError, passwordCompareSync } from './utils';
+import SessionFormatter from '#root/formatters/Session';
 
-const formatSession = ({ 
-    PK: id, 
-    createdAt, 
-    expiresAt, 
-    userId
-}) => ({
-    id,
-    createdAt,
-    expiresAt,
-    userId
-});
-
-const sendFormattedResponse = res => formatted => res.send(formatted);
-
-const buildSession = user => {
-    const expirationDate = addHours(new Date(), USER_SESSION_EXPIRY_HOURS);
-    const sessionToken = uuidv4();
-
-    return {
-        PK: `Session-${sessionToken}`,
-        SK: 'SESSION',
-        createdAt: new Date().toISOString(),
-        expiresAt: expirationDate.toISOString(),
-        userId: user.id
-    }
-}
+const sendFormattedResponse = (res) => (formatted) => res.send(formatted);
 
 const createSession = async (req, res, next) => {
-    if (!req.body.email || !req.body.password )
-        return next(new Error('Invalid email or password'));
+  if (!req.body.email || !req.body.password) {
+    return next(new Error('Invalid email or password'));
+  }
 
-    const { email, password } = req.body;
-    const user = await getUserByEmail(req.body.email);
-    
-    if (!passwordCompareSync(password, user.passwordHash)) 
-        return next(new Error('Invalid password'));
-    
-    const session = buildSession(user);
+  const { email, password } = req.body;
+  const user = await getUserByEmail(email);
 
-    const params = {
-        Item: session,
-        TableName: 'sensei'
-    }
+  if (!passwordCompareSync(password, user.passwordHash)) {
+    return next(new Error('Invalid password'));
+  }
 
-    return put(params)
-        .then((_) => formatSession(session))
-        .then(sendFormattedResponse(res))
-        .catch(handleError(next));
-}
+  const session = SessionFormatter.toDb(user);
+
+  const params = {
+    Item: session,
+    TableName: 'sensei',
+  };
+
+  return put(params)
+    .then(() => SessionFormatter.fromDb(session))
+    // .then(() => formatSession(session))
+    .then(sendFormattedResponse(res))
+    .catch(handleError(next));
+};
 
 export default createSession;
