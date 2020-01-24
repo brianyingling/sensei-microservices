@@ -26,7 +26,6 @@ const createSession = async (req, res, next) => {
 
   return put(params)
     .then(() => SessionFormatter.fromDb(session))
-    // .then(() => formatSession(session))
     .then(sendFormattedResponse(res))
     .catch(handleError(next));
 };
