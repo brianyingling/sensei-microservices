@@ -11,18 +11,17 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors({
-    origin: (origin, cb) => cb(null, true),
-    credentials: true
+  origin: (origin, cb) => cb(null, true),
+  credentials: true,
 }));
 
 routes(app);
 
-app.use((err, req, res, next) => {
-    return res.status(500).json({
-        message: err.message
-    })
-});
+app.use((err, req, res) => res.status(500).json({
+  message: err.message,
+}));
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Users Service listening on port ${PORT}`);
+  // eslint-disable-next-line no-console
+  console.log(`Users Service listening on port ${PORT}`);
 });

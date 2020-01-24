@@ -5,9 +5,9 @@ import getUser from './getUser';
 import getUsers from './getUsers';
 
 export {
-    createSession,
-    createUser,
-    getSession,
-    getUser,
-    getUsers
+  createSession,
+  createUser,
+  getSession,
+  getUser,
+  getUsers,
 };
