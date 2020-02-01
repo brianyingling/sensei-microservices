@@ -29,7 +29,6 @@ type Error = {
 }
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.log('RESPONSE:', res);
   res.status(500).json({
     message: err.message,
   });

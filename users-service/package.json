@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "start:ts": "tsc && node build/server",
-    "start": "babel-watch -L ./src/server.js",
+    "start": "tsc && node build/server",
+    "start:js": "babel-watch -L ./src/server.js",
     "test": "jest"
   },
   "keywords": [],
