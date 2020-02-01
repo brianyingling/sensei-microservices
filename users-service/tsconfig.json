@@ -5,7 +5,13 @@
     "allowJs": true,
     "outDir": "./build",
     "rootDir": "./src",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "src/",
+    "paths": {
+      "#root/*": [
+        "./*"
+      ],
+    }
   },
   "include": [
     "src/**/*.ts",
@@ -13,9 +19,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "baseUrl": "./src",
-  "paths": {
-    "#root": "."
-  }
+  ]
 }

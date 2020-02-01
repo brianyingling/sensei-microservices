@@ -10,8 +10,18 @@
 import uuidv4 from 'uuid/v4';
 import { hashPassword } from '#root/handlers/utils';
 
+interface PersistedUser {
+  createdAt: string,
+  data: string,
+  email: string,
+  passwordHash: string,
+  PK: string,
+  SK: string,
+  updatedAt: string
+}
+
 export default class UserFormatter {
-  static toDb({ email, password }) {
+  static toDb({ email, password }): PersistedUser {
     const date = new Date().toISOString();
     return {
       createdAt: date,
