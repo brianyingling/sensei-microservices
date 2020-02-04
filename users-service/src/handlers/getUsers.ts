@@ -1,4 +1,8 @@
-
+import {
+  Request,
+  Response,
+  NextFunction
+} from 'express';
 import { query } from '#root/db';
 import { handleError, sendResponse } from './utils';
 
@@ -13,11 +17,11 @@ const params = {
 
 const format = ({ Items: items = [] }) => items;
 
-const getUsers = async (req, res, next) => (
+const getUsers = async (req: Request, res: Response, next: NextFunction) => (
   query(params)
     .then(format)
     .then(sendResponse(res))
-    .then(handleError(next))
+    .catch(handleError(next))
 );
 
 export default getUsers;

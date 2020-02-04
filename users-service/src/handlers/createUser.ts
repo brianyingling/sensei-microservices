@@ -36,7 +36,7 @@ const createUser = (req, res, next) => {
   };
 
   return getUserByEmail(email)
-    .then(checkIfUserAlreadyExists(next))
+    .then(checkIfUserAlreadyExists())
     .then(() => put(params))
     .then(format(Item))
     .then(sendResponse(res))
