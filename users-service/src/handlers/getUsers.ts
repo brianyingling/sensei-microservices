@@ -4,6 +4,7 @@ import {
   NextFunction
 } from 'express';
 import { query } from '#root/db';
+import UserFormatter from '#root/formatters/User';
 import { handleError, sendResponse } from './utils';
 
 const params = {
@@ -15,7 +16,9 @@ const params = {
   },
 };
 
-const format = ({ Items: items = [] }) => items;
+const format = ({ Items: items = [] }) => (
+  items.map(item => UserFormatter.fromDb(item))
+);
 
 const getUsers = async (req: Request, res: Response, next: NextFunction) => (
   query(params)
