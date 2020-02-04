@@ -28,7 +28,7 @@ type Error = {
   status: number
 }
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _: Request, res: Response, __: NextFunction) => {
   res.status(500).json({
     message: err.message,
   });
