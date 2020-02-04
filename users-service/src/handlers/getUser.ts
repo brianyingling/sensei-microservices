@@ -1,5 +1,6 @@
 import { query } from '#root/db';
 import { handleError, sendResponse } from './utils';
+import UserFormatter from '#root/formatters/User';
 
 const buildParams = (id) => ({
   TableName: 'sensei',
@@ -12,14 +13,10 @@ const buildParams = (id) => ({
 const format = ({ Items: items = [] }) => {
   if (items.length === 0) return null;
   const [user] = items;
-  return {
-    id: user.PK,
-    email: user.email,
-    passwordHash: user.passwordHash,
-  };
+  return UserFormatter.fromDb(user);
 };
 
-export const queryForUser = (id) => (
+export const queryForUser = (id: string) => (
   query(buildParams(id))
     .then(format)
 );

@@ -1,12 +1,3 @@
-// const Item = {
-//   createdAt: date,
-//   data: email,
-//   email,
-//   passwordHash: hashPassword(password),
-//   PK: `User-${uuidv4()}`,
-//   SK: 'USER',
-//   updatedAt: date,
-// };
 import uuidv4 from 'uuid/v4';
 import { hashPassword } from '#root/handlers/utils';
 
@@ -20,7 +11,21 @@ interface PersistedUser {
   updatedAt: string
 }
 
+export interface User {
+  id: string,
+  email: string,
+  passwordHash: string
+}
+
 export default class UserFormatter {
+  static fromDb({ PK: id, email, passwordHash }): User {
+    return {
+      id,
+      email,
+      passwordHash
+    }
+  }
+
   static toDb({ email, password }): PersistedUser {
     const date = new Date().toISOString();
     return {

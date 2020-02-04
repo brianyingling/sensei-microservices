@@ -1,13 +1,10 @@
 import { query } from '#root/db';
+import UserFormatter from '#root/formatters/User';
 
 const format = ({ Items: items = [] }) => {
   if (!items.length) return null;
   const [user] = items;
-  return {
-    id: user.PK,
-    email: user.email,
-    passwordHash: user.passwordHash,
-  };
+  return UserFormatter.fromDb(user);
 };
 
 const getUserByEmail = (email) => {

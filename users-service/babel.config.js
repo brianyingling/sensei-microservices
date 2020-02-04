@@ -4,7 +4,7 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          '#root': './src',
+          '#root': './build',
         },
       },
     ],
@@ -18,5 +18,6 @@ module.exports = {
         },
       },
     ],
+    '@babel/preset-typescript',
   ],
 };
