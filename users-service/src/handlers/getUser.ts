@@ -1,8 +1,9 @@
+import { Request, Response } from 'express';
 import { query } from '#root/db';
 import { handleError, sendResponse } from './utils';
 import UserFormatter from '#root/formatters/User';
 
-const buildParams = (id) => ({
+const buildParams = (id: string) => ({
   TableName: 'sensei',
   KeyConditionExpression: 'PK = :pk',
   ExpressionAttributeValues: {
@@ -21,7 +22,7 @@ export const queryForUser = (id: string) => (
     .then(format)
 );
 
-const getUser = (req, res) => (
+const getUser = (req: Request, res: Response) => (
   queryForUser(req.params.id)
     .then(sendResponse(res))
     .catch(handleError)

@@ -7,7 +7,7 @@ const format = ({ Items: items = [] }) => {
   return UserFormatter.fromDb(user);
 };
 
-const getUserByEmail = (email) => {
+const getUserByEmail = (email: string) => {
   const params = {
     TableName: 'sensei',
     IndexName: 'SK-data-index',

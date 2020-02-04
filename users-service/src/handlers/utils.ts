@@ -1,16 +1,17 @@
 import bcrypt from 'bcryptjs';
+import { NextFunction, Response } from 'express'
 
-const handleError = (next) => (e) => next(e);
+const handleError = (next: NextFunction) => (e: Error) => next(e);
 
-const hashPassword = (password) => (
+const hashPassword = (password: string) => (
   bcrypt.hashSync(password, bcrypt.genSaltSync(12))
 );
 
-const passwordCompareSync = (passwordToTest, passwordHash) => (
+const passwordCompareSync = (passwordToTest: string, passwordHash: string) => (
   bcrypt.compareSync(passwordToTest, passwordHash)
 );
 
-const sendResponse = (res) => (data) => res.send(data);
+const sendResponse = (res: Response) => (data) => res.send(data);
 
 export {
   handleError,
