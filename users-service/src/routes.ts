@@ -1,3 +1,4 @@
+import { Application } from 'express';
 import {
   createSession,
   createUser,
@@ -6,7 +7,7 @@ import {
   getUsers,
 } from './handlers';
 
-const routes = (app) => {
+const routes = (app: Application) => {
   app.get('/users/:id', getUser);
   app.get('/users', getUsers);
   app.post('/users', createUser);
